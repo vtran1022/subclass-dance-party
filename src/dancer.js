@@ -1,13 +1,12 @@
 var makeDancer = function (top, left, timeBetweenSteps) {
-  debugger;
   this.$node = $('<span class="dancer"></span>');
-  this.step(timeBetweenSteps);
+  this.timeBetweenSteps = timeBetweenSteps;
+  this.step();
   this.setPosition(top, left);
 };
 
 makeDancer.prototype.step = function (timeBetweenSteps) {
-  var thisInstance = this;
-  setTimeout(thisInstance.step, timeBetweenSteps);
+  setTimeout(this.step.bind(this), this.timeBetweenSteps);
 };
 
 makeDancer.prototype.setPosition = function (top, left) {
@@ -15,9 +14,9 @@ makeDancer.prototype.setPosition = function (top, left) {
     top: top,
     left: left
   };
-  // debugger;
   this.$node.css(styleSettings);
 };
+
 
 // // Creates and returns a new dancer object that can step
 // var makeDancer = function(top, left, timeBetweenSteps) {
@@ -32,7 +31,7 @@ makeDancer.prototype.setPosition = function (top, left) {
 //     // it just schedules the next step
 //     setTimeout(dancer.step, timeBetweenSteps);
 //   };
-// dancer.step();
+//   dancer.step();
 
 //   dancer.setPosition = function(top, left) {
 //     // Use css top and left properties to position our <span> tag
